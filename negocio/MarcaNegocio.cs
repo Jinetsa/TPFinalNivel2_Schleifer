@@ -12,8 +12,10 @@ namespace negocio
         List<Marca> marcas = new List<Marca>();
         AccesoDatos datos = new AccesoDatos();
 
-        public List<Marca> listaMarcas()
+        public List<Marca> listarMarcas()
         {
+            try
+            {
                 datos.setearConsulta("select Id, Descripcion from MARCAS");
                 datos.ejecutarLectura();
 
@@ -22,9 +24,21 @@ namespace negocio
                     Marca aux = new Marca();
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    marcas.Add(aux);
                 }
 
-                return listaMarcas();
+                return marcas;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }

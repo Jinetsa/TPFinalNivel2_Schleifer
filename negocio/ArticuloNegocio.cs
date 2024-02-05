@@ -11,9 +11,9 @@ namespace negocio
 {
     public class ArticuloNegocio
     {
-        public List<Articulo> listar()
+        public List<Articulo> listarArticulos()
         {
-            List<Articulo> lista = new List<Articulo>();
+            List<Articulo> articulos = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
 
             try
@@ -35,12 +35,10 @@ namespace negocio
                     aux.Marca.Descripcion = (string)datos.Lector["Marca"];
 
 
-                    lista.Add(aux); 
+                    articulos.Add(aux); 
                 }
 
-
-                datos.cerrarConexion();
-                return lista;
+                return articulos;
 
             }
             catch (Exception ex)
@@ -48,8 +46,12 @@ namespace negocio
 
                 throw;
             }
+            finally
+            {
+                datos.cerrarConexion();
+            }
 
-         }
+        }
 
         public void agregar(Articulo nuevo)
         {

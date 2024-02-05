@@ -23,7 +23,7 @@ namespace presentacion
         private void Form1_Load(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            listaArticulos = negocio.listar();
+            listaArticulos = negocio.listarArticulos();
             dgvArticulos.DataSource = listaArticulos;
             dgvArticulos.Columns["ImagenUrl"].Visible = false;
            pbxArticulo.Load(listaArticulos[0].ImagenUrl);
@@ -51,7 +51,20 @@ namespace presentacion
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            frmAgregar agregar = new frmAgregar();
+            agregar.ShowDialog();
+        }
 
+        private void btnDetalles_Click(object sender, EventArgs e)
+        {
+            frmDetalles detalles = new frmDetalles();
+            detalles.ShowDialog();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            frmModificar modificar = new frmModificar();    
+            modificar.ShowDialog();
         }
     }
 }
