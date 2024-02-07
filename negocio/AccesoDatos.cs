@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Net;
+using dominio;
+using negocio;
+using System.Data;
 
 namespace negocio
 {
@@ -46,6 +49,30 @@ namespace negocio
             }
 
         }
+        public void ejecutarAccion()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+        
+        public void setearParametros(string nombre, object objeto)
+        {
+            comando.Parameters.AddWithValue(nombre, objeto);
+        }
+
         public void cerrarConexion()
         {
             if (lector != null)
