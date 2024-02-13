@@ -57,7 +57,7 @@ namespace presentacion
             try
             {
                 if(articulo == null)
-                    articulo = new Articulo();
+                articulo = new Articulo();
                 articulo.codArticulo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
