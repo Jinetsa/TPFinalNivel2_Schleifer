@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
 using negocio;
+using System.Configuration;
 
 namespace presentacion
 {
     public partial class frmAgregar : Form
     {
         private Articulo articulo = null;
+        private OpenFileDialog archivo = null;
+        private bool precioOk = false;
+
         public frmAgregar()
         {
             InitializeComponent();
@@ -61,23 +66,37 @@ namespace presentacion
                 articulo.codArticulo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
-                articulo.Precio = decimal.Parse(txtPrecio.Text);
+                if(precioOk)
+                    articulo.Precio = decimal.Parse(txtPrecio.Text);
                 articulo.Marca = (Marca)cbxMarca.SelectedItem;
                 articulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
-                articulo.ImagenUrl = txtUrlImagen.Text;
 
-                if (articulo.Id != 0)
+                if (archivo != null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
                 {
-                    negocio.modificar(articulo);
-                    MessageBox.Show("Modificado exitosamente");
+                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["Imagenes-Catalogo"] + archivo.SafeFileName);
+                    articulo.ImagenUrl = ConfigurationManager.AppSettings["Imagenes-Catalogo"] + archivo.SafeFileName;
                 }
                 else
+                    articulo.ImagenUrl = txtUrlImagen.Text;
+
+                if (validarCampos() && precioOk)
                 {
-                    negocio.agregar(articulo);                           
-                    MessageBox.Show("Articulo agregado exitosamente");
+                    if (articulo.Id != 0)
+                    {
+                        negocio.modificar(articulo);
+                        MessageBox.Show("Modificado exitosamente");
+                    }
+                    else
+                    {
+                        negocio.agregar(articulo);
+                        MessageBox.Show("Articulo agregado exitosamente");
+                    }
+
                 }
-                Close();
-                
+                else
+                    return;
+
+                Close();                
 
             }
             catch (Exception ex)
@@ -123,6 +142,71 @@ namespace presentacion
         {
             string imagen = txtUrlImagen.Text;
             cargarImagen(imagen);
+        }
+
+        private void btnAgregarArchivo_Click(object sender, EventArgs e)
+        {
+            crearCarpeta();
+            archivo = new OpenFileDialog();
+            archivo.Filter = "jpg|*.jpg;|png|*.png";
+            if (archivo.ShowDialog() == DialogResult.OK)
+            {
+                if (File.Exists(ConfigurationManager.AppSettings["Imagenes-Catalogo"] + archivo.SafeFileName))
+                    MessageBox.Show("La imagen ya existe en la carpeta, seleccione otra por favor.");
+            else
+            { 
+                txtUrlImagen.Text = archivo.FileName;
+                cargarImagen(archivo.FileName);
+            }
+                               
+            }
+        }
+        private void crearCarpeta()
+        {
+            if (!Directory.Exists(ConfigurationManager.AppSettings["Imagenes-Catalogo"]))
+            {
+                DialogResult respuesta = MessageBox.Show("Se creara la carpeta 'Imagenes-Catalogo' en el disco 'C:\'", "Crear carpeta");
+                if (respuesta == DialogResult.OK)
+                    Directory.CreateDirectory(ConfigurationManager.AppSettings["Imagenes-Catalogo"]);
+                else
+                {
+                    Close();
+                }
+            }
+            return;
+        }
+        private bool validarCampos()
+        {
+                if (string.IsNullOrEmpty(txtCodigo.Text) || string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(txtPrecio.Text))
+                {
+                    MessageBox.Show("Ingrese todos los campos requeridos por favor");
+                    return false;
+                }
+                return true;
+        }
+        private bool validarPrecio( string cadena)
+        {
+            if (string.IsNullOrEmpty(cadena))
+            {
+                MessageBox.Show("Ingrese un precio para el articulo por favor");
+                return false;
+            }
+            foreach (char caracter in cadena)
+            {
+                if (!(char.IsNumber(caracter)))
+                {
+                    MessageBox.Show("El precio solo puede contener numeros");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private void txtPrecio_Leave(object sender, EventArgs e)
+        {
+            validarPrecio(txtPrecio.Text);
+            precioOk = true;
+            return;
         }
     }
 }

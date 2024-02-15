@@ -45,6 +45,7 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lblUrlImagen = new System.Windows.Forms.Label();
             this.txtUrlImagen = new System.Windows.Forms.TextBox();
+            this.btnAgregarArchivo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,7 +70,7 @@
             // lblDescripcion
             // 
             this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Location = new System.Drawing.Point(116, 212);
+            this.lblDescripcion.Location = new System.Drawing.Point(116, 244);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(82, 16);
             this.lblDescripcion.TabIndex = 2;
@@ -96,7 +97,7 @@
             // lblPrecio
             // 
             this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(149, 249);
+            this.lblPrecio.Location = new System.Drawing.Point(148, 210);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(49, 16);
             this.lblPrecio.TabIndex = 5;
@@ -111,10 +112,11 @@
             // 
             // txtPrecio
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(215, 243);
+            this.txtPrecio.Location = new System.Drawing.Point(214, 204);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(146, 22);
             this.txtPrecio.TabIndex = 8;
+            this.txtPrecio.Leave += new System.EventHandler(this.txtPrecio_Leave);
             // 
             // txtNombre
             // 
@@ -125,7 +127,7 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(214, 209);
+            this.txtDescripcion.Location = new System.Drawing.Point(214, 241);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(146, 22);
             this.txtDescripcion.TabIndex = 11;
@@ -180,7 +182,7 @@
             // lblUrlImagen
             // 
             this.lblUrlImagen.AutoSize = true;
-            this.lblUrlImagen.Location = new System.Drawing.Point(83, 277);
+            this.lblUrlImagen.Location = new System.Drawing.Point(83, 278);
             this.lblUrlImagen.Name = "lblUrlImagen";
             this.lblUrlImagen.Size = new System.Drawing.Size(115, 16);
             this.lblUrlImagen.TabIndex = 19;
@@ -188,17 +190,28 @@
             // 
             // txtUrlImagen
             // 
-            this.txtUrlImagen.Location = new System.Drawing.Point(214, 277);
+            this.txtUrlImagen.Location = new System.Drawing.Point(214, 278);
             this.txtUrlImagen.Name = "txtUrlImagen";
             this.txtUrlImagen.Size = new System.Drawing.Size(148, 22);
             this.txtUrlImagen.TabIndex = 20;
             this.txtUrlImagen.Leave += new System.EventHandler(this.txtUrlImagen_Leave);
+            // 
+            // btnAgregarArchivo
+            // 
+            this.btnAgregarArchivo.Location = new System.Drawing.Point(369, 278);
+            this.btnAgregarArchivo.Name = "btnAgregarArchivo";
+            this.btnAgregarArchivo.Size = new System.Drawing.Size(33, 23);
+            this.btnAgregarArchivo.TabIndex = 21;
+            this.btnAgregarArchivo.Text = "+";
+            this.btnAgregarArchivo.UseVisualStyleBackColor = true;
+            this.btnAgregarArchivo.Click += new System.EventHandler(this.btnAgregarArchivo_Click);
             // 
             // frmAgregar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(439, 602);
+            this.Controls.Add(this.btnAgregarArchivo);
             this.Controls.Add(this.txtUrlImagen);
             this.Controls.Add(this.lblUrlImagen);
             this.Controls.Add(this.btnCancelar);
@@ -244,5 +257,6 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Label lblUrlImagen;
         private System.Windows.Forms.TextBox txtUrlImagen;
+        private System.Windows.Forms.Button btnAgregarArchivo;
     }
 }

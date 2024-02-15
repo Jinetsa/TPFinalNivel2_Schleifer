@@ -44,25 +44,24 @@ namespace presentacion
 
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
-                if(dgvArticulos.CurrentRow != null)
+            if (dgvArticulos.CurrentRow != null)
             {
-                 Articulo seleccionado = (Articulo) dgvArticulos.CurrentRow.DataBoundItem;
-                 cargarImagen(seleccionado.ImagenUrl);           
+                Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                cargarImagen(seleccionado.ImagenUrl);
             }
         }
 
-        //Metodo para cargar imagenes
         private void cargarImagen(string imagen)
         {
             try
             {
-                 pbxArticulo.Load(imagen);
+                pbxArticulo.Load(imagen);
             }
             catch (Exception ex)
             {
                 cargarImagen("https://louisville.edu/history/images/noimage.jpg/image");
             }
-         
+
         }
         private void ocultarColumnas()
         {
@@ -143,7 +142,16 @@ namespace presentacion
             ArticuloNegocio negocio = new ArticuloNegocio();
             try
             {
-                //ESTO HAY QUE CAMBIARLO TODO CON EL NUEVO MODELO DE FILTRO AVANZADO
+                if (string.IsNullOrEmpty(txtPrecio.Text))
+                {
+                    MessageBox.Show("Ingrese un precio para filtrar por favor");
+                    return;
+                }
+                if (!(validarPrecio(txtPrecio.Text)))
+                {
+                    MessageBox.Show("El campo precio solo admite valores numericos");
+                    return;
+                }
                 int marca = (int)cboMarca.SelectedValue;
                 int categoria = (int)cboCategoria.SelectedValue;
                 string cboRangoPrecio = cboPrecio.SelectedItem.ToString();
@@ -171,81 +179,21 @@ namespace presentacion
             cboPrecio.Items.Clear();
             cboPrecio.Items.Add("Hasta");
             cboPrecio.Items.Add("Desde");
-        }
-        private void label1_Click(object sender, EventArgs e)
-        {
-            //borrar esto
-
+            cboPrecio.SelectedIndex = 0;
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private bool validarPrecio(string cadena)
         {
-            //borrar esto
-
+            foreach (char caracter in cadena)
+            {
+                if (!(char.IsNumber(caracter)))
+                    return false;
+            }
+            return true;
         }
-        //private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    MarcaNegocio marca = new MarcaNegocio();
-        //    CategoriaNegocio categoria = new CategoriaNegocio();
-        //    string campo = cboMarca.SelectedItem.ToString();
-
-        //    switch (campo)
-        //    {
-        //        case "Categoria":
-        //            {
-        //                cboCategoria.DataSource = categoria.listarCategorias();
-        //                cboCategoria.ValueMember = "Id";
-        //                cboCategoria.DisplayMember = "Descripcion";
-        //                campo = "c.Id = ";
-        //            }
-        //        break;
-        //        case "Marca":
-        //            {
-        //                cboCategoria.DataSource = marca.listarMarcas();
-        //                cboCategoria.ValueMember = "Id";
-        //                cboCategoria.DisplayMember = "Descripcion";
-        //            }
-        //            break;
-        //        case "Precio":
-        //            {
-        //                cboCategoria.DataSource = null;
-        //                cboCategoria.Items.Clear();
-        //                cboCategoria.Items.Add("Hasta");
-        //                cboCategoria.Items.Add("Desde");
-        //            }
-        //        break;
-        //    }
-
-
-        //}
-
-
-
-
-        private void dgvArticulos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btnReestabler_Click(object sender, EventArgs e)
         {
-            //borrar esto
-        }
-
-        private void pbxArticulo_Click(object sender, EventArgs e)
-        {
-            //borrar esto
-
-        }
-
-        private void txtFiltroAvanzado_TextChanged(object sender, EventArgs e)
-        {
-            //borrar esto
-        }
-
-        private void lblFiltroAvanzado_Click(object sender, EventArgs e)
-        {
-            //borrar esto
-        }
-
-        private void cboCriterio_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //borrar esto
+            cargar();
         }
     }
 }
