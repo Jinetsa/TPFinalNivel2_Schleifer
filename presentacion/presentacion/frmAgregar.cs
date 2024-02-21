@@ -18,7 +18,6 @@ namespace presentacion
     {
         private Articulo articulo = null;
         private OpenFileDialog archivo = null;
-        private bool precioOk = false;
 
         public frmAgregar()
         {
@@ -66,21 +65,14 @@ namespace presentacion
                 articulo.codArticulo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
-                if(precioOk)
+                if(validarPrecio(txtPrecio.Text.ToString()))
                     articulo.Precio = decimal.Parse(txtPrecio.Text);
                 articulo.Marca = (Marca)cbxMarca.SelectedItem;
                 articulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
 
-                if (archivo != null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
+                if (validarCampos())
                 {
-                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["Imagenes-Catalogo"] + archivo.SafeFileName);
-                    articulo.ImagenUrl = ConfigurationManager.AppSettings["Imagenes-Catalogo"] + archivo.SafeFileName;
-                }
-                else
-                    articulo.ImagenUrl = txtUrlImagen.Text;
-
-                if (validarCampos() && precioOk)
-                {
+                    guardarImagen();
                     if (articulo.Id != 0)
                     {
                         negocio.modificar(articulo);
@@ -91,7 +83,6 @@ namespace presentacion
                         negocio.agregar(articulo);
                         MessageBox.Show("Articulo agregado exitosamente");
                     }
-
                 }
                 else
                     return;
@@ -179,34 +170,56 @@ namespace presentacion
         {
                 if (string.IsNullOrEmpty(txtCodigo.Text) || string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(txtPrecio.Text))
                 {
-                    MessageBox.Show("Ingrese todos los campos requeridos por favor");
+                    MessageBox.Show("Ingrese todos los campos obligatorios por favor");
                     return false;
                 }
-                return true;
-        }
-        private bool validarPrecio( string cadena)
-        {
-            if (string.IsNullOrEmpty(cadena))
-            {
-                MessageBox.Show("Ingrese un precio para el articulo por favor");
-                return false;
-            }
-            foreach (char caracter in cadena)
-            {
-                if (!(char.IsNumber(caracter)))
-                {
-                    MessageBox.Show("El precio solo puede contener numeros");
-                    return false;
-                }
-            }
             return true;
         }
+        private bool validarPrecio(string cadena)
+        {
+            decimal precio;
+            if (!decimal.TryParse(cadena, out precio))
+            {
+                MessageBox.Show("Ingrese un precio válido para el artículo");
+                return false;
+            }
+            else if (precio < 0)
+            {
+                MessageBox.Show("El precio no puede ser negativo");
+                return false;
+            }
+            else if (cadena.Count(c => c == '.') > 1)
+            {
+                MessageBox.Show("El precio solo puede contener un punto decimal");
+                return false;
+            }
+            else if (cadena.Contains('.') && cadena.Substring(cadena.IndexOf('.') + 1).Length > 2) 
+            {
+                MessageBox.Show("El precio solo puede tener hasta dos decimales");
+                return false;
+            }
+           return true;
+        }
 
+        private void guardarImagen()
+        {
+            if (archivo != null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
+            {
+                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["Imagenes-Catalogo"] + archivo.SafeFileName);
+                articulo.ImagenUrl = ConfigurationManager.AppSettings["Imagenes-Catalogo"] + archivo.SafeFileName;
+            }
+            else
+                articulo.ImagenUrl = txtUrlImagen.Text;
+        }
         private void txtPrecio_Leave(object sender, EventArgs e)
         {
             validarPrecio(txtPrecio.Text);
-            precioOk = true;
             return;
+        }
+
+        private void lblObligatorios_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

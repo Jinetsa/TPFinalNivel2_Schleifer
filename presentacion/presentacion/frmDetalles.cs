@@ -59,6 +59,14 @@ namespace presentacion
             this.Close();
         }
 
+        private void lblImagenDatos_Click(object sender, EventArgs e)
+        {
+            //bvorrar
+        }
 
+        private void pbxArticulo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

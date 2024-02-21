@@ -45,6 +45,7 @@
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.cboPrecio = new System.Windows.Forms.ComboBox();
             this.btnReestabler = new System.Windows.Forms.Button();
+            this.lblBusqueda = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
@@ -69,7 +70,7 @@
             this.pbxArticulo.Location = new System.Drawing.Point(615, 70);
             this.pbxArticulo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pbxArticulo.Name = "pbxArticulo";
-            this.pbxArticulo.Size = new System.Drawing.Size(367, 431);
+            this.pbxArticulo.Size = new System.Drawing.Size(367, 320);
             this.pbxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxArticulo.TabIndex = 1;
             this.pbxArticulo.TabStop = false;
@@ -85,10 +86,10 @@
             // 
             // btnBusqueda
             // 
-            this.btnBusqueda.Location = new System.Drawing.Point(417, 473);
+            this.btnBusqueda.Location = new System.Drawing.Point(780, 470);
             this.btnBusqueda.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBusqueda.Name = "btnBusqueda";
-            this.btnBusqueda.Size = new System.Drawing.Size(75, 28);
+            this.btnBusqueda.Size = new System.Drawing.Size(111, 30);
             this.btnBusqueda.TabIndex = 4;
             this.btnBusqueda.Text = "Buscar";
             this.btnBusqueda.UseVisualStyleBackColor = true;
@@ -151,7 +152,7 @@
             // lblMarca
             // 
             this.lblMarca.AutoSize = true;
-            this.lblMarca.Location = new System.Drawing.Point(54, 487);
+            this.lblMarca.Location = new System.Drawing.Point(33, 477);
             this.lblMarca.Name = "lblMarca";
             this.lblMarca.Size = new System.Drawing.Size(48, 16);
             this.lblMarca.TabIndex = 9;
@@ -160,7 +161,7 @@
             // lblCategoria
             // 
             this.lblCategoria.AutoSize = true;
-            this.lblCategoria.Location = new System.Drawing.Point(33, 459);
+            this.lblCategoria.Location = new System.Drawing.Point(231, 477);
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(69, 16);
             this.lblCategoria.TabIndex = 10;
@@ -169,7 +170,7 @@
             // lblPrecio
             // 
             this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(248, 459);
+            this.lblPrecio.Location = new System.Drawing.Point(446, 477);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(52, 16);
             this.lblPrecio.TabIndex = 11;
@@ -179,7 +180,7 @@
             // 
             this.cboMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMarca.FormattingEnabled = true;
-            this.cboMarca.Location = new System.Drawing.Point(109, 451);
+            this.cboMarca.Location = new System.Drawing.Point(88, 473);
             this.cboMarca.Margin = new System.Windows.Forms.Padding(4);
             this.cboMarca.Name = "cboMarca";
             this.cboMarca.Size = new System.Drawing.Size(115, 24);
@@ -189,7 +190,7 @@
             // 
             this.cboCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCategoria.FormattingEnabled = true;
-            this.cboCategoria.Location = new System.Drawing.Point(109, 479);
+            this.cboCategoria.Location = new System.Drawing.Point(307, 474);
             this.cboCategoria.Margin = new System.Windows.Forms.Padding(4);
             this.cboCategoria.Name = "cboCategoria";
             this.cboCategoria.Size = new System.Drawing.Size(115, 24);
@@ -197,7 +198,7 @@
             // 
             // txtPrecio
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(251, 479);
+            this.txtPrecio.Location = new System.Drawing.Point(615, 474);
             this.txtPrecio.Margin = new System.Windows.Forms.Padding(4);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(144, 22);
@@ -207,9 +208,9 @@
             // 
             this.cboPrecio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPrecio.FormattingEnabled = true;
-            this.cboPrecio.Location = new System.Drawing.Point(306, 451);
+            this.cboPrecio.Location = new System.Drawing.Point(498, 473);
             this.cboPrecio.Name = "cboPrecio";
-            this.cboPrecio.Size = new System.Drawing.Size(89, 24);
+            this.cboPrecio.Size = new System.Drawing.Size(110, 24);
             this.cboPrecio.TabIndex = 15;
             // 
             // btnReestabler
@@ -222,11 +223,21 @@
             this.btnReestabler.UseVisualStyleBackColor = true;
             this.btnReestabler.Click += new System.EventHandler(this.btnReestabler_Click);
             // 
+            // lblBusqueda
+            // 
+            this.lblBusqueda.AutoSize = true;
+            this.lblBusqueda.Location = new System.Drawing.Point(33, 441);
+            this.lblBusqueda.Name = "lblBusqueda";
+            this.lblBusqueda.Size = new System.Drawing.Size(135, 16);
+            this.lblBusqueda.TabIndex = 17;
+            this.lblBusqueda.Text = "Busqueda avanzada:";
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1009, 525);
+            this.ClientSize = new System.Drawing.Size(1009, 520);
+            this.Controls.Add(this.lblBusqueda);
             this.Controls.Add(this.btnReestabler);
             this.Controls.Add(this.cboPrecio);
             this.Controls.Add(this.txtPrecio);
@@ -274,6 +285,8 @@
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.ComboBox cboPrecio;
         private System.Windows.Forms.Button btnReestabler;
+        private System.Windows.Forms.Label lblBusquedaAvanzada;
+        private System.Windows.Forms.Label lblBusqueda;
     }
 }
 

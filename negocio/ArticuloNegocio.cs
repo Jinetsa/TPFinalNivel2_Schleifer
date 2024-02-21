@@ -33,7 +33,7 @@ namespace negocio
                     aux.Marca.Descripcion = (string)datos.Lector["Marca"];
                     aux.Marca.Id = (int)datos.Lector["IdMarca"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Precio = Math.Round((decimal)datos.Lector["Precio"], 2);
                     //Validacion en caso de que la imagen en DB sea null
                     if (!(datos.Lector["ImagenUrl"] is DBNull))
                     aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
@@ -61,7 +61,7 @@ namespace negocio
         }
 
 
-        public void agregar(Articulo nuevo) //Originalmmente en accesodatos 
+        public void agregar(Articulo nuevo) 
         {
                 try
                 {

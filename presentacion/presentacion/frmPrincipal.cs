@@ -90,6 +90,11 @@ namespace presentacion
         private void btnModificar_Click(object sender, EventArgs e)
         {
             Articulo seleccionado;
+            if (dgvArticulos.CurrentRow == null) 
+            { 
+                MessageBox.Show("Seleccione un articulo");
+                return;
+            }
             seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             frmAgregar modificar = new frmAgregar(seleccionado);
             modificar.ShowDialog();
@@ -195,5 +200,17 @@ namespace presentacion
         {
             cargar();
         }
+
+        //private void InitializeComponent()
+        //{
+        //    this.SuspendLayout();
+        //    // 
+        //    // frmPrincipal
+        //    // 
+        //    this.ClientSize = new System.Drawing.Size(723, 468);
+        //    this.Name = "frmPrincipal";
+        //    this.ResumeLayout(false);
+
+        //}
     }
 }

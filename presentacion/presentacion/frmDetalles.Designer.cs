@@ -174,10 +174,11 @@
             // 
             this.pbxArticulo.Location = new System.Drawing.Point(77, 257);
             this.pbxArticulo.Name = "pbxArticulo";
-            this.pbxArticulo.Size = new System.Drawing.Size(340, 248);
+            this.pbxArticulo.Size = new System.Drawing.Size(339, 248);
             this.pbxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxArticulo.TabIndex = 14;
             this.pbxArticulo.TabStop = false;
+            this.pbxArticulo.Click += new System.EventHandler(this.pbxArticulo_Click);
             // 
             // lblUrlImagen
             // 
@@ -190,20 +191,18 @@
             // 
             // lblImagenDatos
             // 
-            this.lblImagenDatos.AutoSize = true;
+            this.lblImagenDatos.AutoEllipsis = true;
             this.lblImagenDatos.Location = new System.Drawing.Point(218, 198);
-            this.lblImagenDatos.MaximumSize = new System.Drawing.Size(200, 0);
             this.lblImagenDatos.Name = "lblImagenDatos";
-            this.lblImagenDatos.Size = new System.Drawing.Size(200, 80);
+            this.lblImagenDatos.Size = new System.Drawing.Size(198, 34);
             this.lblImagenDatos.TabIndex = 16;
-            this.lblImagenDatos.Text = "Esto sigue rompiendose si la cadena de texto del link de la imagen es muy larga, " +
-    "se superpone con la imagen abajo y queda horrible";
+            this.lblImagenDatos.Click += new System.EventHandler(this.lblImagenDatos_Click);
             // 
             // frmDetalles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 600);
+            this.ClientSize = new System.Drawing.Size(485, 600);
             this.Controls.Add(this.lblImagenDatos);
             this.Controls.Add(this.lblUrlImagen);
             this.Controls.Add(this.pbxArticulo);
@@ -221,8 +220,13 @@
             this.Controls.Add(this.lblCodigo);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAceptar);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(503, 647);
+            this.MinimumSize = new System.Drawing.Size(503, 647);
             this.Name = "frmDetalles";
-            this.Text = "Detalle de articulo";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Detalles de articulo";
             this.Load += new System.EventHandler(this.frmDetalles_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).EndInit();
             this.ResumeLayout(false);
