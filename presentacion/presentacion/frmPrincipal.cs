@@ -31,6 +31,7 @@ namespace presentacion
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 listaArticulos = negocio.listarArticulos();
                 dgvArticulos.DataSource = listaArticulos;
+                dgvArticulos.Columns["Precio"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 ocultarColumnas();
                 cargarDesplegables();
             }
@@ -200,17 +201,5 @@ namespace presentacion
         {
             cargar();
         }
-
-        //private void InitializeComponent()
-        //{
-        //    this.SuspendLayout();
-        //    // 
-        //    // frmPrincipal
-        //    // 
-        //    this.ClientSize = new System.Drawing.Size(723, 468);
-        //    this.Name = "frmPrincipal";
-        //    this.ResumeLayout(false);
-
-        //}
     }
 }

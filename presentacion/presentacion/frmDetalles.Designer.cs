@@ -178,7 +178,6 @@
             this.pbxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxArticulo.TabIndex = 14;
             this.pbxArticulo.TabStop = false;
-            this.pbxArticulo.Click += new System.EventHandler(this.pbxArticulo_Click);
             // 
             // lblUrlImagen
             // 
@@ -196,7 +195,6 @@
             this.lblImagenDatos.Name = "lblImagenDatos";
             this.lblImagenDatos.Size = new System.Drawing.Size(198, 34);
             this.lblImagenDatos.TabIndex = 16;
-            this.lblImagenDatos.Click += new System.EventHandler(this.lblImagenDatos_Click);
             // 
             // frmDetalles
             // 
